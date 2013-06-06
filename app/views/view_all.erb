@@ -1,0 +1,23 @@
+<div class="container">
+  <h1>All Posts</h1>
+  <h4>Ordered by created date, decending. </h4>
+
+  <% Post.order("created_at DESC").each do |post| %>
+  <ul>
+    <li><a href="/post/<%= post.id %>"><%= post.title %></a>, by: <%= post.author %>, Date: <%= post.created_at %></li>
+  </ul><% end %>
+
+  <h1>All Tags</h1>
+  <h4>Ordered by created date, decending. </h4>
+
+  <% Tag.order("created_at DESC").each do |tag| %>
+  <ul>
+    <li><%= tag.name %>, created at: <%= tag.created_at %></li>
+  </ul><% end %>
+
+  <a href="/"><input class="cancel_button" type="submit" value="Home"></a>
+
+</div>
+
+
+

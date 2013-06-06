@@ -1,0 +1,16 @@
+<div class="container">
+
+  <h1>All posts tagged with: <%= @selected_tag.name %> </h1>
+  <h4>Ordered by created date, decending. </h4>
+
+  <% @selected_posts.each do |post| %>
+  <ul>
+    <li><a href="/post/<%= post.id %>"><%= post.title %></a>, by: <%= post.author %>, Date: <%= post.created_at %></li>
+  </ul><% end %>
+
+  <a href="/"><input class="cancel_button" type="submit" value="Home"></a>
+
+</div>
+
+
+

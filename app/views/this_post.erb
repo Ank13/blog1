@@ -1,0 +1,19 @@
+<div class="container">
+
+  <h1><%= @post.title %> </h1>
+  <p> <%= @post.body %></p>
+
+  <% @post.tags.each do |tag| %>
+  <p> <%= tag.name %> </p>
+  <% end %>
+
+  <h3> <%= @post.author %>, <%= @post.created_at %></h3>
+   
+  <form action="/edit" method="post">
+    <input type="hidden" name="post_id" value= <%= @post.id %> >
+    <input class="button" type="submit" value="Edit">
+  </form>
+
+  <a href="/"><input class="cancel_button" type="submit" value="Home"></a>
+
+</div>

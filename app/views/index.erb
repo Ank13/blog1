@@ -1,23 +1,27 @@
 <div class="container">
-  <h1>Welcome to Sinatra!</h1>
-  <p>Hello, world!</p>
+  <h1>Log your life</h1>
+  <h2>With inane detail and poor grammar!</h2>
 
-  <table>
-    <tr>
-      <th>File Description</th>
-      <th>File Location</th>
-    </tr>
-    <tr>
-      <td>This view file</td>
-      <td><code><%= __FILE__.gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The layout file</td>
-      <td><code><%= File.expand_path('../layout.erb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The current controller</td>
-      <td><code><%= File.expand_path('../../controllers/index.rb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-  </table>
+
+ 
+    <a href="/create"> <input class="button" type="submit" value="Create new post"></a>
+    <a href="/view_all"><input class="button" type="submit" value="View all posts"></a> 
+    
+    <br><br>
+    TD: edit a post <br>
+    TD: delete post <br>
+  
+    <div class="tag_search"> 
+      <form action='/tag'  method="post">   
+        <h3>Show me all the posts tagged with...</h3>
+        <select name="tagname">
+          <% Tag.order("updated_at DESC").each do |tag| %>
+          <option><%= tag.name %></option>
+          <% end %>
+        </select>
+        <input class="button" type="submit" value="Search">
+      </form>
+    <div>
+
 </div>
+
