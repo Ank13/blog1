@@ -5,7 +5,7 @@ get '/create' do
   @title ||= nil 
   @body ||= "" 
   @tags ||= [] 
-  @id ||= "NEW"
+  @id ||= nil
   erb :create
 end
 
@@ -14,20 +14,17 @@ get '/view_all' do
 end
 
 post '/create' do
-  # if params[:id].nil?  #then create the post
+  # params[:post_id].inspect
+  id = params[:post_id]
+  if id.nil?  #then create the post
     post = Post.create(title: params[:title], author: params[:author], body: params[:body])
     params[:tags].split(" ").each do |tag| 
-      if Tag.find_by_name(tag).nil?
-        this_tag = Tag.create(name: tag)
-      else
-        this_tag = Tag.find_by_name(tag)
-      end 
+      Tag.find_by_name(tag).nil? ? this_tag = Tag.create(name: tag) : this_tag = Tag.find_by_name(tag)
       Join.create(post_id: post.id, tag_id: this_tag.id)
     end
-  # else #update the post
-  #   post = Post.find(params[:id])
-  #   post.update(title: params[:title], author: params[:author], body: params[:body])
-  # end
+  else #update the post
+    Post.update(id, title: params[:title], author: params[:author], body: params[:body])
+  end
   redirect 'view_all'
 end
 
@@ -40,6 +37,7 @@ post '/edit' do
   @tags = []
   @id = post.id
   post.tags.each {|tag| @tags << tag.name}
+  # @id.inspect
   erb :create
 end
 
