@@ -1,5 +1,3 @@
-#posts controller
-
 get '/create' do
   @author ||= nil
   @title ||= nil 
@@ -28,7 +26,6 @@ post '/create' do
   redirect 'view_all'
 end
 
-
 post '/edit' do
   post = Post.find(params[:post_id])
   @author = post.author
@@ -44,4 +41,10 @@ end
 get '/post/:id' do
   @post = Post.find(params[:id])
   erb :this_post
+end
+
+post '/delete' do
+  post = Post.find(params[:post_id])
+  post.destroy
+  redirect 'view_all'
 end
