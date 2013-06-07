@@ -1,13 +1,6 @@
 <div class="container">
-  <h1>Log your life</h1>
-  <h2>With inane detail and poor grammar!</h2>
-
-
- 
-    <a href="/create"> <input class="button" type="submit" value="Create new post"></a>
-    <a href="/view_all"><input class="button" type="submit" value="View all posts"></a> 
-    
-    <br>
+  <h1>Web Logger </h1>
+  <h4>The hottest technology of 1996</h4> 
 
     <div class="tag_search"> 
       <form action='/tag'  method="post">   
@@ -20,6 +13,16 @@
         <input class="button" type="submit" value="Search">
       </form>
     <div>
+
+  <h1>All Posts</h1>    
+  <a href="/create"> <input class="button" type="submit" value="Create new post"></a>
+  <h4>Ordered by created date, decending. </h4>
+    <% Post.order("created_at DESC").each do |post| %>
+      <a href="/post/<%= post.id %>" id="post_preview" >>>> <%= post.title %></a><br>
+      by: <%= post.author %>, Date: <%= post.created_at %><br>
+      <div id="all_posts"><%= post.body %></div>
+    <% end %>
+
 
 </div>
 

@@ -14,7 +14,7 @@ end
 post '/create' do
   # params[:post_id].inspect
   id = params[:post_id]
-  if id.nil?  #then create the post
+  if id.empty?  #then create the post
     post = Post.create(title: params[:title], author: params[:author], body: params[:body])
     params[:tags].split(" ").each do |tag| 
       Tag.find_by_name(tag).nil? ? this_tag = Tag.create(name: tag) : this_tag = Tag.find_by_name(tag)
@@ -23,7 +23,7 @@ post '/create' do
   else #update the post
     Post.update(id, title: params[:title], author: params[:author], body: params[:body])
   end
-  redirect 'view_all'
+  redirect '/'
 end
 
 post '/edit' do
@@ -46,5 +46,5 @@ end
 post '/delete' do
   post = Post.find(params[:post_id])
   post.destroy
-  redirect 'view_all'
+  redirect '/'
 end
